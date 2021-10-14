@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "pong")
-	})
+	api := &api{
+		store: NewStore(),
+	}
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8080", http.HandlerFunc(api.Serve))
 	if err != nil {
-		return
+		panic(err)
 	}
 }

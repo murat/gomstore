@@ -23,4 +23,4 @@ go run .
 
 ## References
 
-- https://github.com/...
+- [Different approaches to HTTP routing in Go](https://benhoyt.com/writings/go-routing/)
