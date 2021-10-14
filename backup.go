@@ -3,8 +3,22 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"os"
+	"time"
 )
+
+func (s *store) PeriodicBackup(backupFile string, interval int) {
+	go func() {
+		for {
+			time.Sleep(time.Duration(interval) * time.Minute)
+
+			if err := s.Save(backupFile); err != nil {
+				log.Printf("[error] %v\n", err)
+			}
+		}
+	}()
+}
 
 func (s *store) Save(filePath string) error {
 	s.lock.RLock()
@@ -14,12 +28,7 @@ func (s *store) Save(filePath string) error {
 	if err != nil {
 		return err
 	}
-	defer func(f *os.File) {
-		err := f.Close()
-		if err != nil {
-
-		}
-	}(f)
+	defer f.Close()
 
 	data, _ := json.MarshalIndent(s.All(), "", "\t")
 

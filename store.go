@@ -27,6 +27,9 @@ type Store interface {
 
 	// Load data from file
 	Load(filePath string) error
+
+	// PeriodicBackup starts a goroutine that responsible to save data to file periodically by interval
+	PeriodicBackup(backupFile string, interval int)
 }
 
 type store struct {

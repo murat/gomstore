@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	"path"
 	"time"
 )
 
@@ -18,6 +20,24 @@ func main() {
 		Addr:    ":8080",
 		Handler: http.HandlerFunc(api.Serve),
 	}
+
+	backupFile := path.Join(os.TempDir(), "gomstore.json")
+
+	// load initial data from backup file
+	if _, err := os.Stat(backupFile); !errors.Is(err, os.ErrNotExist) {
+		err := api.store.Load(backupFile)
+		if err != nil {
+			log.Printf("[error] %v\n", err)
+		}
+	}
+
+	// start periodic backup
+	api.store.PeriodicBackup(backupFile, 1)
+	defer func(store Store, filePath string) {
+		if err := store.Save(filePath); err != nil {
+			log.Printf("[error] %v\n", err)
+		}
+	}(api.store, backupFile)
 
 	done := make(chan bool)
 	quit := make(chan os.Signal, 1)
