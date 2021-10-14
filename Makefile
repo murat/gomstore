@@ -1,4 +1,4 @@
-BINARY_NAME=./bin/main
+BINARY_NAME=./bin/gomstore
 
 build:
 	GOARCH=amd64 GOOS=darwin go build -o ${BINARY_NAME}-darwin main.go
@@ -13,8 +13,7 @@ test:
 	go test ./...
 
 coverage:
-	rm -r ./coverage && mkdir ./coverage
-	go test ./... -coverprofile=./coverage/coverage.out && go tool cover -html=./coverage/coverage.out -o ./coverage/coverage.html
+	go test ./... -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html
 
 lint:
 	golangci-lint run --fix -c ./.golangci.yml
