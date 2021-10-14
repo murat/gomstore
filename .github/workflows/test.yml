@@ -1,0 +1,37 @@
+name: test
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        go: [ '1.16', '1.17' ]
+    runs-on: ubuntu-latest
+    name: Go ${{ matrix.go }} sample
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - name: Build
+        run: go build -o ./bin .
+      - name: Test
+        run: go test ./...
+      - name: Coverage
+        run: |
+          go test ./... -coverprofile=coverage.out
+          go tool cover -html=coverage.out -o coverage.html
+      - name: Archive built files
+        uses: actions/upload-artifact@v2
+        with:
+          name: built files
+          path: bin
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage report
+          path: coverage.html
