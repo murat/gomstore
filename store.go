@@ -7,6 +7,9 @@ type Store interface {
 	// Set inserts/updates given key with given val
 	Set(key, val string)
 
+	// All returns all keys from data
+	All() map[string]string
+
 	// Get returns val and existence for given key
 	Get(key string) (string, bool)
 
@@ -18,6 +21,12 @@ type Store interface {
 
 	// Count returns data count
 	Count() int
+
+	// Save data to file
+	Save(filePath string) error
+
+	// Load data from file
+	Load(filePath string) error
 }
 
 type store struct {
@@ -38,6 +47,13 @@ func (s *store) Set(key, val string) {
 	defer s.lock.Unlock()
 
 	s.data[key] = val
+}
+
+func (s *store) All() map[string]string {
+	s.lock.RLock()
+	defer s.lock.RUnlock()
+
+	return s.data
 }
 
 func (s *store) Get(key string) (string, bool) {

@@ -15,7 +15,6 @@ linters:
   enable:
     - deadcode
     - errcheck
-    - goconst
     - gofmt
     - goimports
     - revive

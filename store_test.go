@@ -37,6 +37,18 @@ func Test_store_Set(t *testing.T) {
 	}
 }
 
+func Test_store_All(t *testing.T) {
+	s := NewStore()
+	s.Set("foo", "bar")
+	s.Set("bar", "foo")
+
+	data := s.All()
+	c := len(data)
+	if c != 2 {
+		t.Fatalf("there should be 2 key but there are %d keys", c)
+	}
+}
+
 func Test_store_Get(t *testing.T) {
 	s := NewStore()
 	s.Set("foo", "bar")
