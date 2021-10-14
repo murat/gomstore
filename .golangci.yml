@@ -1,4 +1,3 @@
-# options for analysis running
 run:
   # default concurrency is a available CPU number
   concurrency: 4
@@ -8,3 +7,26 @@ run:
 
   # exit code when at least one issue was found, default is 1
   issues-exit-code: 1
+
+  # include test files or not, default is true
+  tests: true
+
+linters:
+  enable:
+    - deadcode
+    - errcheck
+    - goconst
+    - gofmt
+    - goimports
+    - revive
+    - gosimple
+    - ineffassign
+    - staticcheck
+    - misspell
+    - structcheck
+    - unconvert
+    - unparam
+    - varcheck
+    - govet
+    - unused
+    - typecheck
