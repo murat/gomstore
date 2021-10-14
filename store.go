@@ -2,7 +2,7 @@ package main
 
 import "sync"
 
-// Store is an interface for simple in-mem store application
+// Store is an interface for simple in-mem store application.
 type Store interface {
 	// Set inserts/updates given key with given val
 	Set(key, val string)
@@ -25,8 +25,8 @@ type store struct {
 	data map[string]string
 }
 
-// NewStore creates a store
-func NewStore() *store {
+// NewStore creates a store.
+func NewStore() Store {
 	return &store{
 		lock: sync.RWMutex{},
 		data: map[string]string{},
@@ -45,6 +45,7 @@ func (s *store) Get(key string) (string, bool) {
 	defer s.lock.RUnlock()
 
 	val, found := s.data[key]
+
 	return val, found
 }
 
