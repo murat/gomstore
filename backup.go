@@ -14,14 +14,16 @@ func (s *store) Save(filePath string) error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
+	defer func(f *os.File) {
+		err := f.Close()
+		if err != nil {
+
+		}
+	}(f)
 
 	data, _ := json.MarshalIndent(s.All(), "", "\t")
 
-	_, err = f.WriteAt(data, 0)
-	if err != nil {
-		return err
-	}
+	_, _ = f.WriteAt(data, 0)
 
 	return nil
 }

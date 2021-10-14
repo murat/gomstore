@@ -3,7 +3,9 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"io/fs"
 	"io/ioutil"
+	"os"
 	"path"
 	"reflect"
 	"testing"
@@ -27,6 +29,11 @@ func Test_backup_Save(t *testing.T) {
 	if !bytes.Equal(f, data) {
 		t.Fatalf("backup file(%d bytes) does not contain stored data(%d bytes)", len(f), len(data))
 	}
+
+	err = s.Save("/path/of/not/exists/file.json")
+	if err == nil {
+		t.Fatal("path is not accessible but it worked")
+	}
 }
 
 func Test_backup_Load(t *testing.T) {
@@ -49,5 +56,18 @@ func Test_backup_Load(t *testing.T) {
 	val, found := s2.Get("foo")
 	if !found || val != "bar" {
 		t.Fatalf("comparison failed saved and loaded data")
+	}
+
+	s3 := NewStore()
+	err := s3.Load("/path/of/not/exists/file.json")
+	if err == nil {
+		t.Fatal("path is not accessible but it worked")
+	}
+
+	_ = os.WriteFile(filePath, []byte("invalid json"), fs.FileMode(os.O_CREATE))
+	s4 := NewStore()
+	err = s4.Load(filePath)
+	if err == nil {
+		t.Fatal("data file has invalid json but it worked")
 	}
 }
