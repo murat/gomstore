@@ -6,17 +6,12 @@ RUN apk add --no-cache git make
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
-
-RUN go mod download
-
 COPY . .
 
 RUN make build
 
 FROM alpine
 
-COPY --from=builder /app/build/gomstore /gomstore
+COPY --from=builder /app/bin/gomstore /gomstore
 
 ENTRYPOINT [ "/gomstore"]
