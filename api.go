@@ -90,7 +90,7 @@ func (h *api) Serve(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.NotFound(w, r)
+	w.WriteHeader(http.StatusNotFound)
 }
 
 func getParam(r *http.Request) string {
@@ -106,6 +106,11 @@ func pong(_ *api, w http.ResponseWriter, _ *http.Request) {
 func set(h *api, w http.ResponseWriter, r *http.Request) {
 	key := getParam(r)
 	val := r.FormValue("value")
+
+	if val == "" {
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		return
+	}
 
 	h.store.Set(key, val)
 
