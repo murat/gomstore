@@ -1,5 +1,7 @@
 # gomstore
 
+![Status](https://github.com/murat/gomstore/actions/workflows/test.yml/badge.svg)
+
 ## Description
 
 **gomstore** is a rest API written in golang that has endpoints to manage an in-memory store.
@@ -41,3 +43,7 @@ data to memory when running if the backup file already exists.
 ## References
 
 - [Different approaches to HTTP routing in Go](https://benhoyt.com/writings/go-routing/)
+
+## Contribute
+
+All PR’s and issues are welcome!
