@@ -1,7 +1,5 @@
 # gomstore
 
-> It's a homework for [yemeksepeti](https://yemeksepeti.com).
-
 ## Description
 
 **gomstore** is a rest API written in golang that has endpoints to manage an in-memory store.
