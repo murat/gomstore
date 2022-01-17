@@ -27,11 +27,6 @@ func (h *api) Serve(w http.ResponseWriter, r *http.Request) {
 	routes := []route{
 		{
 			method:  "GET",
-			regex:   regexp.MustCompile("^/ping$"),
-			handler: pong,
-		},
-		{
-			method:  "GET",
 			regex:   regexp.MustCompile("^/([^/]+)$"),
 			handler: get,
 		},
@@ -97,10 +92,6 @@ func getParam(r *http.Request) string {
 	fields, _ := r.Context().Value(ctxKey{}).([]string)
 
 	return fields[0]
-}
-
-func pong(_ *api, w http.ResponseWriter, _ *http.Request) {
-	_, _ = fmt.Fprintf(w, "{\"key\":\"%s\",\"value\":\"%s\"}", "ping", "pong")
 }
 
 func set(h *api, w http.ResponseWriter, r *http.Request) {

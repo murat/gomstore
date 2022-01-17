@@ -33,28 +33,6 @@ func Test_api_Serve(t *testing.T) {
 			},
 		},
 		{
-			title: "happy ping",
-			request: req{
-				method: "GET",
-				url:    "/ping",
-			},
-			response: &resp{
-				status: http.StatusOK,
-				body:   `{"key":"ping","value":"pong"}`,
-			},
-		},
-		{
-			title: "bad ping",
-			request: req{
-				method: "HEAD",
-				url:    "/ping",
-			},
-			response: &resp{
-				status: http.StatusMethodNotAllowed,
-				body:   "",
-			},
-		},
-		{
 			title: "happy set",
 			request: req{
 				method: "POST",
