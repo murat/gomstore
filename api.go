@@ -17,9 +17,10 @@ type api struct {
 type ctxKey struct{}
 
 type route struct {
-	method  string
-	regex   *regexp.Regexp
-	handler func(h *api, w http.ResponseWriter, r *http.Request)
+	method    string
+	regex     *regexp.Regexp
+	handler   func(h *api, w http.ResponseWriter, r *http.Request)
+	unusedVar bool
 }
 
 // Serve responsible for fulfill requests.
