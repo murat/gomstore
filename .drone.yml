@@ -5,6 +5,9 @@ name: test
 steps:
   - name: test
     image: golang
+    volumes:
+      - name: deps
+        path: /go
     commands:
       - go test
 
@@ -15,5 +18,12 @@ name: build
 steps:
   - name: build
     image: golang
+    volumes:
+      - name: deps
+        path: /go
     commands:
       - go build
+
+volumes:
+  - name: deps
+    temp: {}
