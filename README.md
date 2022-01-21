@@ -2,6 +2,8 @@
 
 ![Status](https://github.com/murat/gomstore/actions/workflows/test.yml/badge.svg)
 
+[![Status](https://cloud.drone.io/api/badges/murat/gomstore/status.svg)](https://cloud.drone.io/murat/gomstore)
+
 ## Description
 
 **gomstore** is a rest API written in golang that has endpoints to manage an in-memory store.
