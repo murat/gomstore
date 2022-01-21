@@ -1,0 +1,29 @@
+kind: pipeline
+type: docker
+name: test
+
+steps:
+  - name: test
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go test
+
+---
+kind: pipeline
+type: docker
+name: build
+steps:
+  - name: build
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go build
+
+volumes:
+  - name: deps
+    temp: {}
