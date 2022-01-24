@@ -1,7 +1,6 @@
 kind: pipeline
 type: docker
 name: test
-
 steps:
   - name: test
     image: golang
@@ -15,6 +14,10 @@ steps:
 kind: pipeline
 type: docker
 name: build
+trigger:
+  event:
+    exclude:
+      - custom
 steps:
   - name: build
     image: golang
