@@ -24,6 +24,22 @@ steps:
     commands:
       - go build
 
+---
+kind: pipeline
+type: docker
+name: coverage
+trigger:
+  event:
+    - custom
+steps:
+  - name: coverage
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go test ./... -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html
+
 volumes:
   - name: deps
     temp: {}
