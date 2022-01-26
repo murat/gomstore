@@ -1,5 +1,20 @@
 kind: pipeline
 type: docker
+name: lint
+steps:
+  - name: lint
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go mod download
+      - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.43.0
+      - make lint
+
+---
+kind: pipeline
+type: docker
 name: test
 steps:
   - name: test
@@ -32,8 +47,8 @@ kind: pipeline
 type: docker
 name: coverage
 depends_on:
+  - lint
   - test
-  - build
 trigger:
   event:
     - custom
