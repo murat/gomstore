@@ -31,6 +31,9 @@ steps:
 kind: pipeline
 type: docker
 name: coverage
+depends_on:
+  - test
+  - build
 trigger:
   event:
     - custom
