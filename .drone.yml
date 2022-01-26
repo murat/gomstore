@@ -29,6 +29,9 @@ steps:
 kind: pipeline
 type: docker
 name: build
+depends_on:
+  - lint
+  - test
 trigger:
   event:
     exclude:
