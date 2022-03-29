@@ -14,4 +14,4 @@ coverage:
 	go test ./... -coverprofile=coverage.out && go tool cover -html=coverage.out -o coverage.html
 
 lint:
-	golangci-lint run --fix -c ./.golangci.yml
+	golangci-lint run ./... -c ./.golangci.yml
