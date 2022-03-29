@@ -48,6 +48,23 @@ steps:
 ---
 kind: pipeline
 type: docker
+name: deploy
+depends_on:
+  - lint
+  - test
+  - build
+trigger:
+  event:
+    - tag
+steps:
+  - name: deploy
+    image: alpine
+    commands:
+      - sleep $[($RANDOM%10)+10]s
+
+---
+kind: pipeline
+type: docker
 name: coverage
 depends_on:
   - lint
