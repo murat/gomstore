@@ -100,7 +100,7 @@ func getParam(r *http.Request) string {
 }
 
 func pong(_ *api, w http.ResponseWriter, _ *http.Request) {
-	_, _ = fmt.Fprintf(w, "{\"key\":\"%s\",\"value\":\"%s\"}", "ping", "foo")
+	_, _ = fmt.Fprintf(w, "{\"key\":\"%s\",\"value\":\"%s\"}", "ping", "foo0oooo")
 }
 
 func set(h *api, w http.ResponseWriter, r *http.Request) {
