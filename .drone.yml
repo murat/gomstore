@@ -54,10 +54,8 @@ depends_on:
   - test
   - build
 trigger:
-  branch:
-    - staging
   event:
-    - push
+    - tag
 steps:
   - name: deploy
     image: alpine
