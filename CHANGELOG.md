@@ -10,5 +10,4 @@ and this project adheres to [Calendar Versioning](https://calver.org/#scheme).
 - Changelog created
 - Foo feature
 
-
 [Unreleased]: https://github.com/murat/gomstore/master
