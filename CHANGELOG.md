@@ -6,6 +6,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/#scheme).
 
 ## [Unreleased]
 
+## [v0.2.3] - 2022-03-31
 ### Added
 - Changelog created
 - Foo feature
@@ -13,4 +14,5 @@ and this project adheres to [Calendar Versioning](https://calver.org/#scheme).
 ### Change
 - Bar falan filan
 
-[Unreleased]: https://github.com/murat/gomstore/master
+[Unreleased]: https://github.com/murat/gomstore/compare/v0.2.3...HEAD
+[v0.2.3]: https://github.com/murat/gomstore/compare/v0.2.2...v0.2.3
