@@ -9,4 +9,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/#scheme).
 ### Added
 - Changelog created
 
+### Change
+- Bar falan filan
+
 [Unreleased]: https://github.com/murat/gomstore/master
