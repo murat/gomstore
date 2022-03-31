@@ -8,6 +8,7 @@ and this project adheres to [Calendar Versioning](https://calver.org/#scheme).
 
 ### Added
 - Changelog created
+- Foo feature
 
 ### Change
 - Bar falan filan
